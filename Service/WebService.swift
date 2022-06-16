@@ -13,7 +13,7 @@ class WebService {
     func getData(url:URL,completion:@escaping ([Article]?) -> ()) {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            if  error != nil, data == nil {
+            if  error != nil {
                 print(error?.localizedDescription)
                 completion(nil)
             }else if let data = data {

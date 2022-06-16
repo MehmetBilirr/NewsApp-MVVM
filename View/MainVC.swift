@@ -18,6 +18,7 @@ final class MainVC: UIViewController, MainVCProtocol {
     private var rowHeight : CGFloat?
     var articles: [Article] = []
     var viewModel:MainViewModel = MainViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +40,7 @@ final class MainVC: UIViewController, MainVCProtocol {
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(DetailsTableViewCell.self, forCellReuseIdentifier: DetailsTableViewCell.identifier)
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         //tableView.rowHeight = self.view.frame.size.height * 0.15
@@ -76,9 +78,14 @@ extension MainVC:UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTableViewCell.identifier) as! DetailsTableViewCell
         cell.setup(article: articles[indexPath.row])
         
-        
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailsVCViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
     

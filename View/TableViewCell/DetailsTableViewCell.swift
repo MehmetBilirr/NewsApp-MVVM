@@ -70,6 +70,7 @@ extension DetailsTableViewCell {
             make.right.equalToSuperview()
             
             
+            
 
         }
                 
@@ -79,7 +80,7 @@ extension DetailsTableViewCell {
     
     private func makeDetail() {
         detailLbl.snp.makeConstraints { make in
-            make.top.equalTo(contentView).offset(70)
+            make.top.equalTo(titleLbl.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview()
             
