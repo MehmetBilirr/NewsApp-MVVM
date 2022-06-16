@@ -8,13 +8,22 @@
 import UIKit
 import SnapKit
 
-final class MainVC: UIViewController {
+protocol MainVCProtocol {
+    func saveData(datas : [Article])
+}
+
+final class MainVC: UIViewController, MainVCProtocol {
+    
     private let tableView:UITableView = UITableView()
     private var rowHeight : CGFloat?
+    var articles: [Article] = []
+    var viewModel:MainViewModel = MainViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        viewModel.mainVCDelegate = self
+        viewModel.fetchNews()
         Configure()
         
     }
@@ -41,6 +50,16 @@ final class MainVC: UIViewController {
         
     }
     
+    func saveData(datas: [Article]) {
+        
+        articles = datas
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        
+    }
+    
     
     
 
@@ -50,12 +69,12 @@ final class MainVC: UIViewController {
 
 extension MainVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTableViewCell.identifier) as! DetailsTableViewCell
-        
+        cell.setup(article: articles[indexPath.row])
         
         
         

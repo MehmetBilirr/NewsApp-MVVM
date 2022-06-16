@@ -8,5 +8,5 @@
 import Foundation
 
 struct Route {
-    static let url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9e2f756bf48d4f4f8cf1dba463b098f8"
+    static let url = "https://newsapi.org/v2/top-headlines?country=tr&apiKey=9e2f756bf48d4f4f8cf1dba463b098f8"
 }

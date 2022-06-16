@@ -48,6 +48,10 @@ class DetailsTableViewCell: UITableViewCell {
         makeDetail()
         drawDesign()
     }
+    func setup(article:Article) {
+        titleLbl.text = article.title
+        detailLbl.text = article.description
+    }
     
     
     
