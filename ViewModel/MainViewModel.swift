@@ -23,7 +23,7 @@ final class MainViewModel {
         
         webService.getData(url: Route.url.asUrl!) { [weak self] (articles) in
             
-            print(articles)
+            
             self?.news = articles ?? []
             self?.mainVCDelegate!.saveData(datas: self?.news ?? [])
             

@@ -10,14 +10,19 @@ import SnapKit
 
 protocol MainVCProtocol {
     func saveData(datas : [Article])
+    
+    
 }
 
 final class MainVC: UIViewController, MainVCProtocol {
+
+    
     
     private let tableView:UITableView = UITableView()
     private var rowHeight : CGFloat?
     var articles: [Article] = []
     var viewModel:MainViewModel = MainViewModel()
+    var detailsVCDelegate : DetailsVCProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +88,10 @@ extension MainVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailsVCViewController()
+        detailsVCDelegate = vc
+        detailsVCDelegate?.setup(news: articles[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
+        
         
         
     }

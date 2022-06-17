@@ -7,20 +7,31 @@
 
 import UIKit
 import SnapKit
+import AlamofireImage
+
+protocol DetailsVCProtocol {
+    
+    func setup(news:Article)
+    
+    
+}
 
 final class DetailsVCViewController: UIViewController {
     static let identifier = "DetailsVCViewController"
     private let newsImage = UIImageView()
     private let titleLbl = UILabel()
     private let detailLabel = UILabel()
+    var viewControl = MainVC()
+    var news : Article?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        newsImage.image = UIImage(named: "ataturk")
-        titleLbl.text = "kajdlk jl şdkaş skdakj sdhasd adkljaljd asjdn ajsnd ajnd jand"
-        detailLabel.text = "kamsdklamsd aksdl kasdjkl ansdkj nakjd nakjsbd ajhdbjkasnd lkansdlk alksdn alkjsdn akjndkaj ndkja nsdkj ansd kajnd akldjaksjd ajd ajd ajdkj aksd hakjshd akjsdh akjshd aksd asjdna jksnd jaknsd kansd kand kjansd kjansdk jansd kansdk naskjd naksjdn ak djnaks dnaskj dn"
+        
+        viewControl.detailsVCDelegate = self
+        
         configure()
+        
     }
     
     
@@ -45,15 +56,28 @@ final class DetailsVCViewController: UIViewController {
         titleLbl.numberOfLines = 0
         makeImage()
         makeTitle()
-        drawDesign()
         makeDetail()
+        drawDesign()
+        
 
         
         
     }
-
     
 
+}
+extension DetailsVCViewController:DetailsVCProtocol {
+    
+    
+    func setup(news: Article) {
+        print(news.title)
+        newsImage.af.setImage(withURL: news.urlToImage.asUrl!)
+        titleLbl.text = news.title
+        detailLabel.text = news.description
+    }
+    
+    
+    
 }
 
 extension DetailsVCViewController {
