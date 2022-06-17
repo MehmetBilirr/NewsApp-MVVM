@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ProgressHUD
 
 
 final class MainViewModel {
@@ -19,11 +20,11 @@ final class MainViewModel {
     
     func fetchNews() {
         
-        
+        ProgressHUD.show()
         
         webService.getData(url: Route.url.asUrl!) { [weak self] (articles) in
             
-            
+            ProgressHUD.dismiss()
             self?.news = articles ?? []
             self?.mainVCDelegate!.saveData(datas: self?.news ?? [])
             

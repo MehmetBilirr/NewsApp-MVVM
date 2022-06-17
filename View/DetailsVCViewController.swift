@@ -21,14 +21,13 @@ final class DetailsVCViewController: UIViewController {
     private let newsImage = UIImageView()
     private let titleLbl = UILabel()
     private let detailLabel = UILabel()
-    var viewControl = MainVC()
+    
     var news : Article?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControl.detailsVCDelegate = self
         
         configure()
         
